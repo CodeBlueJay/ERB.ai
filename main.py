@@ -3,7 +3,6 @@ import random
 import re
 from rapidfuzz import fuzz
 
-# --- Keyword dictionary ---
 responses = {
     "greeting": {
         "keywords": ["hello", "hi", "hey", "yo", "wsg"],
@@ -112,12 +111,8 @@ responses = {
     }
 }
 
-# --- Streamlit UI ---
 st.set_page_config(page_title="ERB.ai", page_icon="💀")
-
 st.title("ERB.ai")
-
-# Store chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -127,20 +122,15 @@ for message in st.session_state.messages:
         st.markdown(f"**{name}**")
         st.write(message["content"])
 
-# Chat input
 user_input = st.chat_input("Speak to the ERB.ai")
 
 if user_input:
-
-    # Show User Message
     with st.chat_message("user"):
         st.markdown("**You**")
         st.write(user_input)
-
     st.session_state.messages.append(
         {"role": "user", "content": user_input}
     )
-
     defaults = [
         "fuh you talm bout",
         "tuff",
@@ -156,7 +146,6 @@ if user_input:
 
     response_text = random.choice(defaults)
 
-    # Keyword detection
     user_input_lower = user_input.lower()
     user_input_clean = re.sub(r"[^\w\s]", "", user_input_lower)
     user_words = user_input_clean.split()
@@ -191,7 +180,6 @@ if user_input:
             response_text = random.choice(best_category["replies"])
             found = True
 
-    # Show bot response immediately
     with st.chat_message("assistant"):
         st.markdown("**ERB**")
         st.write(response_text)
