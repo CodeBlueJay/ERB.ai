@@ -100,7 +100,7 @@ responses = {
         "replies": [
             "who is ts guy calling a clanker"
         ]
-    }
+    },
     "niceness": {
         "keywords": ["hru", "how are you", "how you doin", "you good"],
         "replies": [
