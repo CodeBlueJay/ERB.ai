@@ -83,6 +83,24 @@ responses = {
             "that guy is lowk goated"
         ]
     },
+    "jason": {
+        "keywords": ["jason singh"],
+        "replies": [
+            "jason singh is strange"
+        ]
+    },
+    "blm": {
+        "keywords": ["blm"],
+        "replies": [
+            "yea i support blm"
+        ]
+    },
+    "clanker": {
+        "keywords": ["clanker"],
+        "replies": [
+            "who is ts guy calling a clanker"
+        ]
+    }
     "niceness": {
         "keywords": ["hru", "how are you", "how you doin", "you good"],
         "replies": [
