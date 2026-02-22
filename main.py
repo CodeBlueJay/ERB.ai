@@ -1,5 +1,6 @@
 import streamlit as st
 import random
+import re
 
 # --- Keyword dictionary ---
 responses = {
@@ -55,7 +56,7 @@ responses = {
         ]
     },
     "questions": {
-        "keywords": ["do", "are", "is", "would", "can"],
+        "keywords": ["do", "is", "would", "can"],
         "replies": [
             "yea",
             "nah",
@@ -129,11 +130,13 @@ if user_input:
 
     # Keyword detection
     user_input_lower = user_input.lower()
+    user_input_clean = re.sub(r"[^\w\s]", "", user_input_lower)
+    user_words = user_input_clean.split()
     found = False
 
     for category in responses.values():
         for keyword in category["keywords"]:
-            if keyword in user_input_lower.split():
+            if keyword in user_words:
                 response_text = random.choice(category["replies"])
                 found = True
                 break
