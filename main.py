@@ -16,7 +16,10 @@ responses = {
         "replies": [
             "glazeeeeee",
             "chat is this glaze",
-            "balrighhh"
+            "balrighhh",
+            "yessir",
+            "fr",
+            "ts is lowk peak"
         ]
     },
     "arson": {
@@ -25,15 +28,21 @@ responses = {
             "fuck arson",
             "arson is ai",
             "bro arson bro",
-            "FUCKING JEFF"
+            "FUCKING JEFF",
+            "stfu"
         ]
     },
     "hate": {
-        "keywords": ["lame", "hate", "mid", "gay", "sybau", "kys"],
+        "keywords": ["lame", "hate", "mid", "gay", "sybau", "kys", "fuck"],
         "replies": [
-            "pure hate!",
+            "pure hate",
             "bro this is pure hate",
-            "balrighhh"
+            "balrighhh",
+            "😭",
+            "your just hating",
+            "stfu",
+            "holy hating",
+            "fuck you"
         ]
     },
     "humor": {
@@ -52,7 +61,18 @@ responses = {
             "nah",
             "balrighhh",
             "FUCK NO 😭",
-            "FUCK YEA"
+            "FUCK YEA",
+            "uhh"
+        ]
+    },
+    "gay": {
+        "keywords": ["dick"],
+        "replies": [
+            "you dont have one",
+            "oh fuck no",
+            "pack it up yo",
+            "wth",
+            "fuck you"
         ]
     }
 }
@@ -86,7 +106,17 @@ if user_input:
         {"role": "user", "content": user_input}
     )
 
-    defaults = ["Fuh you talm bout", "Tuff", "oh okay", "balrighhh", "thats lowkey real"]
+    defaults = [
+        "Fuh you talm bout",
+        "Tuff",
+        "oh okay",
+        "balrighhh",
+        "thats lowkey real",
+        "pack it up yo",
+        "wth",
+        "bro 😭",
+        "uhh"
+    ]
 
     response_text = random.choice(defaults)
 
