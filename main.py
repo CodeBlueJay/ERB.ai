@@ -55,11 +55,10 @@ responses = {
         ]
     },
     "questions": {
-        "keywords": ["do", "are"],
+        "keywords": ["do", "are", "is", "would"],
         "replies": [
             "yea",
             "nah",
-            "balrighhh",
             "FUCK NO 😭",
             "FUCK YEA",
             "uhh"
@@ -73,6 +72,13 @@ responses = {
             "pack it up yo",
             "wth",
             "fuck you"
+        ]
+    },
+    "people": {
+        "keywords": ["codebluejay", "lieand"],
+        "replies": [
+            "yo I know that guy",
+            "that guy is lowk goated"
         ]
     }
 }
@@ -107,15 +113,16 @@ if user_input:
     )
 
     defaults = [
-        "Fuh you talm bout",
-        "Tuff",
+        "fuh you talm bout",
+        "tuff",
         "oh okay",
         "balrighhh",
         "thats lowkey real",
         "pack it up yo",
         "wth",
         "bro 😭",
-        "uhh"
+        "uhh",
+        "what"
     ]
 
     response_text = random.choice(defaults)
