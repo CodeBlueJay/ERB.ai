@@ -35,7 +35,7 @@ responses = {
         ]
     },
     "hate": {
-        "keywords": ["lame", "hate", "mid", "gay", "sybau", "kys", "fuck"],
+        "keywords": ["lame", "hate", "mid", "sybau", "kys", "fuck"],
         "replies": [
             "pure hate",
             "bro this is pure hate",
