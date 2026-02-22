@@ -55,7 +55,7 @@ responses = {
         ]
     },
     "questions": {
-        "keywords": ["do", "are"],
+        "keywords": ["do", "are", "is", "can"],
         "replies": [
             "yea",
             "nah",
