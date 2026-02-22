@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 import re
+from rapidfuzz import fuzz
 
 # --- Keyword dictionary ---
 responses = {
@@ -13,7 +14,7 @@ responses = {
         ]
     },
     "glaze": {
-        "keywords": ["cool", "goated"],
+        "keywords": ["cool", "goated", "glaze"],
         "replies": [
             "glazeeeeee",
             "chat is this glaze",
@@ -56,7 +57,7 @@ responses = {
         ]
     },
     "questions": {
-        "keywords": ["do", "is", "would", "can"],
+        "keywords": ["do", "is", "would", "can", "are you"],
         "replies": [
             "yea",
             "nah",
@@ -80,6 +81,15 @@ responses = {
         "replies": [
             "yo I know that guy",
             "that guy is lowk goated"
+        ]
+    },
+    "niceness": {
+        "keywords": ["hru", "how are you", "how you doin", "you good"],
+        "replies": [
+            "im chillin",
+            "im good fr",
+            "yea im straight",
+            "we good"
         ]
     }
 }
@@ -133,6 +143,7 @@ if user_input:
     user_input_clean = re.sub(r"[^\w\s]", "", user_input_lower)
     user_words = user_input_clean.split()
     found = False
+    fuzzy_match_threshold = 85
 
     for category in responses.values():
         for keyword in category["keywords"]:
@@ -142,6 +153,25 @@ if user_input:
                 break
         if found:
             break
+
+    if not found:
+        best_score = 0
+        best_category = None
+
+        for category in responses.values():
+            for keyword in category["keywords"]:
+                if " " in keyword:
+                    score = fuzz.partial_ratio(keyword, user_input_clean)
+                else:
+                    score = max((fuzz.ratio(keyword, word) for word in user_words), default=0)
+
+                if score > best_score:
+                    best_score = score
+                    best_category = category
+
+        if best_category and best_score >= fuzzy_match_threshold:
+            response_text = random.choice(best_category["replies"])
+            found = True
 
     # Show bot response immediately
     with st.chat_message("assistant"):
