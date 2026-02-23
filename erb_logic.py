@@ -108,6 +108,15 @@ RESPONSES = {
             "yea im straight",
             "we good"
         ]
+    },
+    "agreement": {
+        "keywords": ["twin", "ong", "facts", "fr", "real", "this"],
+        "replies": [
+            "twin frfr",
+            "facts",
+            "real",
+            "WE are cooking"
+        ]
     }
 }
 
