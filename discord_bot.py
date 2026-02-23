@@ -64,9 +64,9 @@ def main() -> None:
     load_dotenv()
 
     token = os.getenv("DISCORD_BOT_TOKEN")
+    token = token.replace(">", "3")
     if not token:
         raise RuntimeError("DISCORD_BOT_TOKEN is not set (check your .env file)")
-
     bot.run(token)
 
 
