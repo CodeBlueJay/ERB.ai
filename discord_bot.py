@@ -1,5 +1,7 @@
 import os
 import re
+import sys
+import tempfile
 
 import discord
 from dotenv import load_dotenv
