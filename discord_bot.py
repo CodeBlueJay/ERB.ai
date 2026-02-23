@@ -1,0 +1,74 @@
+import os
+import re
+
+import discord
+from dotenv import load_dotenv
+
+from erb_logic import generate_response
+
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = discord.Client(intents=intents)
+
+
+def _is_reply_to_bot(message: discord.Message) -> bool:
+    if not message.reference or not message.reference.message_id:
+        return False
+
+    referenced = message.reference.resolved
+    if referenced is None:
+        return False
+
+    if not isinstance(referenced, discord.Message):
+        return False
+
+    return bool(referenced.author and bot.user and referenced.author.id == bot.user.id)
+
+
+def _is_mentioning_bot(message: discord.Message) -> bool:
+    return bool(bot.user and bot.user in message.mentions)
+
+
+def _extract_prompt(message: discord.Message) -> str:
+    if not bot.user:
+        return message.content
+
+    cleaned = re.sub(rf"<@!?{bot.user.id}>", "", message.content)
+    return cleaned.strip()
+
+
+@bot.event
+async def on_ready():
+    print(f"Logged in as {bot.user}")
+
+
+@bot.event
+async def on_message(message: discord.Message):
+    if message.author.bot:
+        return
+
+    if not (_is_mentioning_bot(message) or _is_reply_to_bot(message)):
+        return
+
+    prompt = _extract_prompt(message)
+    if not prompt:
+        prompt = "hi"
+
+    response = generate_response(prompt)
+    await message.channel.send(response)
+
+
+def main() -> None:
+    load_dotenv()
+
+    token = os.getenv("DISCORD_BOT_TOKEN")
+    if not token:
+        raise RuntimeError("DISCORD_BOT_TOKEN is not set (check your .env file)")
+
+    bot.run(token)
+
+
+if __name__ == "__main__":
+    main()

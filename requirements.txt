@@ -1,2 +1,4 @@
 streamlit
 rapidfuzz
+discord.py
+python-dotenv
