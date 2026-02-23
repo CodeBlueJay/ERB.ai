@@ -62,12 +62,27 @@ async def on_message(message: discord.Message):
 
 def main() -> None:
     load_dotenv()
+    # Ensure only one instance runs
+    lockfile = os.path.join(tempfile.gettempdir(), 'discord_bot.lock')
+    try:
+        lockfd = os.open(lockfile, os.O_CREAT | os.O_EXCL | os.O_RDWR)
+        os.write(lockfd, str(os.getpid()).encode())
+    except FileExistsError:
+        print("Another instance is already running.")
+        sys.exit(1)
 
-    token = os.getenv("DISCORD_BOT_TOKEN")
-    token = token.replace(">", "3")
-    if not token:
-        raise RuntimeError("DISCORD_BOT_TOKEN is not set (check your .env file)")
-    bot.run(token)
+    try:
+        token = os.getenv("DISCORD_BOT_TOKEN")
+        token = token.replace(">", "3")
+        if not token:
+            raise RuntimeError("DISCORD_BOT_TOKEN is not set (check your .env file)")
+        bot.run(token)
+    finally:
+        try:
+            os.close(lockfd)
+            os.remove(lockfile)
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":
